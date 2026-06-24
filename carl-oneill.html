@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carl O'Neill — Learning & Development · Aged Care, Disability & NDIS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#15302B;        /* deep eucalyptus teal — primary brand */
+    --ink-soft:#234A42;
+    --paper:#F6F2E9;       /* warm paper surface */
+    --paper-2:#EFE8DA;
+    --amber:#D58A2A;       /* ochre accent */
+    --amber-deep:#B96E1C;
+    --sage:#9FB39A;        /* muted secondary */
+    --cream:#FBF8F1;
+    --muted:#5B6E66;
+    --line:rgba(21,48,43,0.14);
+    --max:1120px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Hanken Grotesk",system-ui,sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:"Fraunces",Georgia,serif;font-weight:500;line-height:1.07;margin:0;letter-spacing:-0.01em;}
+  p{margin:0;}
+  a{color:inherit;}
+  ::selection{background:var(--amber);color:var(--ink);}
+  :focus-visible{outline:3px solid var(--amber);outline-offset:3px;border-radius:3px;}
+
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 28px;}
+  .eyebrow{
+    font-family:"Hanken Grotesk",sans-serif;
+    font-weight:600;font-size:12.5px;letter-spacing:0.18em;text-transform:uppercase;
+    color:var(--amber-deep);
+    display:inline-flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:"";width:26px;height:1.5px;background:var(--amber);display:inline-block;}
+
+  /* ---------- NAV ---------- */
+  nav{position:sticky;top:0;z-index:50;background:rgba(246,242,233,0.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  .nav-in{max-width:var(--max);margin:0 auto;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;}
+  .brand{font-family:"Fraunces",serif;font-weight:600;font-size:19px;letter-spacing:-0.01em;}
+  .brand span{color:var(--amber-deep);}
+  .nav-links{display:flex;gap:30px;font-size:14.5px;font-weight:500;}
+  .nav-links a{text-decoration:none;color:var(--muted);transition:color .2s;}
+  .nav-links a:hover{color:var(--ink);}
+  @media(max-width:720px){.nav-links{display:none;}}
+
+  /* ---------- HERO ---------- */
+  .hero{background:var(--ink);color:var(--cream);position:relative;overflow:hidden;}
+  .hero::after{ /* ambient ochre glow */
+    content:"";position:absolute;right:-12%;top:-30%;width:60vw;height:60vw;max-width:680px;max-height:680px;
+    background:radial-gradient(circle, rgba(213,138,42,0.20), rgba(213,138,42,0) 62%);
+    pointer-events:none;
+  }
+  .hero-in{max-width:var(--max);margin:0 auto;padding:96px 28px 84px;position:relative;z-index:1;}
+  .hero .eyebrow{color:var(--amber);}
+  .hero .eyebrow::before{background:var(--amber);}
+  .hero h1{
+    font-size:clamp(40px,7vw,82px);font-weight:500;margin:26px 0 0;color:var(--cream);max-width:14ch;
+  }
+  .hero h1 em{font-style:italic;color:var(--amber);}
+  .hero-sub{margin-top:26px;max-width:52ch;font-size:clamp(17px,2vw,20px);color:rgba(251,248,241,0.82);}
+  .hero-meta{margin-top:34px;display:flex;flex-wrap:wrap;gap:14px 26px;font-size:14.5px;color:rgba(251,248,241,0.7);}
+  .hero-meta span{display:inline-flex;align-items:center;gap:8px;}
+  .dot{width:6px;height:6px;border-radius:50%;background:var(--amber);display:inline-block;}
+
+  /* signature chain */
+  .chain{margin-top:54px;display:flex;align-items:stretch;gap:0;flex-wrap:wrap;border-top:1px solid rgba(251,248,241,0.16);padding-top:34px;}
+  .node{flex:1 1 200px;min-width:180px;position:relative;padding:4px 26px 4px 0;}
+  .node:not(:last-child)::after{
+    content:"→";position:absolute;right:6px;top:50%;transform:translateY(-50%);
+    color:var(--amber);font-size:22px;
+  }
+  .node .role{font-family:"Fraunces",serif;font-size:20px;color:var(--cream);}
+  .node .desc{font-size:13.5px;color:rgba(251,248,241,0.62);margin-top:6px;}
+  @media(max-width:720px){
+    .node{flex:1 1 100%;padding:14px 0;border-bottom:1px solid rgba(251,248,241,0.12);}
+    .node:not(:last-child)::after{content:"↓";right:auto;left:0;top:auto;bottom:-2px;transform:none;}
+    .node .role{padding-left:0;}
+  }
+
+  /* ---------- STATS RECORD ---------- */
+  .record{background:var(--paper-2);border-bottom:1px solid var(--line);}
+  .record-in{max-width:var(--max);margin:0 auto;padding:0 28px;display:grid;grid-template-columns:repeat(4,1fr);}
+  .stat{padding:34px 26px;border-left:1px solid var(--line);}
+  .stat:first-child{border-left:none;padding-left:0;}
+  .stat .num{font-family:"Fraunces",serif;font-size:clamp(34px,4.4vw,48px);font-weight:500;color:var(--ink);line-height:1;}
+  .stat .num b{color:var(--amber-deep);font-weight:500;}
+  .stat .lbl{font-size:13px;color:var(--muted);margin-top:12px;line-height:1.4;}
+  @media(max-width:720px){
+    .record-in{grid-template-columns:1fr 1fr;}
+    .stat{border-left:1px solid var(--line);padding:26px 18px;}
+    .stat:first-child,.stat:nth-child(3){border-left:none;padding-left:18px;}
+    .stat:nth-child(odd){padding-left:0;}
+  }
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:96px 0;}
+  .sec-head{max-width:62ch;margin-bottom:54px;}
+  .sec-head h2{font-size:clamp(28px,4vw,44px);margin-top:18px;}
+  .lede{font-size:clamp(18px,2.2vw,21px);line-height:1.65;color:var(--ink-soft);}
+  .lede + .lede{margin-top:22px;}
+
+  /* about layout */
+  .about-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:64px;align-items:start;}
+  @media(max-width:820px){.about-grid{grid-template-columns:1fr;gap:36px;}}
+  .pull{font-family:"Fraunces",serif;font-size:clamp(24px,3vw,32px);line-height:1.25;color:var(--ink);border-left:3px solid var(--amber);padding-left:24px;}
+
+  /* expertise cards */
+  .practice{background:var(--cream);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;}
+  @media(max-width:820px){.cards{grid-template-columns:1fr;}}
+  .card{background:var(--cream);padding:34px 30px;transition:background .25s;}
+  .card:hover{background:#fff;}
+  .card .idx{font-family:"Hanken Grotesk",sans-serif;font-size:12px;font-weight:600;letter-spacing:0.16em;color:var(--amber-deep);}
+  .card h3{font-size:21px;margin:16px 0 12px;}
+  .card p{font-size:14.5px;color:var(--muted);line-height:1.55;}
+
+  /* experience timeline */
+  .timeline{border-left:2px solid var(--line);margin-left:6px;}
+  .job{position:relative;padding:0 0 46px 38px;}
+  .job:last-child{padding-bottom:0;}
+  .job::before{content:"";position:absolute;left:-9px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--paper);border:2px solid var(--amber);}
+  .job.now::before{background:var(--amber);}
+  .job .when{font-size:13px;font-weight:600;letter-spacing:0.04em;color:var(--amber-deep);text-transform:uppercase;}
+  .job h3{font-size:22px;margin:8px 0 4px;}
+  .job .org{font-size:15px;color:var(--ink-soft);font-weight:600;}
+  .job .blurb{font-size:14.5px;color:var(--muted);margin-top:10px;max-width:64ch;}
+
+  /* credentials */
+  .creds{background:var(--ink);color:var(--cream);}
+  .creds .eyebrow{color:var(--amber);}
+  .creds .eyebrow::before{background:var(--amber);}
+  .creds h2{color:var(--cream);}
+  .cred-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:26px;margin-top:48px;}
+  @media(max-width:720px){.cred-grid{grid-template-columns:1fr;}}
+  .cred{border:1px solid rgba(251,248,241,0.18);border-radius:12px;padding:28px;background:rgba(251,248,241,0.03);}
+  .cred .tick{color:var(--amber);font-weight:700;font-size:13px;letter-spacing:0.1em;}
+  .cred h3{font-size:20px;color:var(--cream);margin:12px 0 6px;}
+  .cred p{font-size:14px;color:rgba(251,248,241,0.66);}
+  .skill-row{margin-top:50px;display:flex;flex-wrap:wrap;gap:10px;}
+  .pill{border:1px solid rgba(251,248,241,0.24);border-radius:999px;padding:8px 16px;font-size:13.5px;color:rgba(251,248,241,0.86);}
+
+  /* contact */
+  .contact{text-align:center;}
+  .contact h2{font-size:clamp(32px,5vw,56px);max-width:18ch;margin:18px auto 0;}
+  .contact .lede{max-width:54ch;margin:24px auto 0;}
+  .cta{display:inline-flex;align-items:center;gap:10px;margin-top:40px;background:var(--ink);color:var(--cream);text-decoration:none;font-weight:600;font-size:16px;padding:17px 34px;border-radius:999px;transition:transform .2s, background .2s;}
+  .cta:hover{background:var(--amber-deep);transform:translateY(-2px);}
+  .cta .arr{transition:transform .2s;}
+  .cta:hover .arr{transform:translateX(4px);}
+
+  footer{background:var(--ink);color:rgba(251,248,241,0.6);font-size:13.5px;}
+  .foot-in{max-width:var(--max);margin:0 auto;padding:30px 28px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid rgba(251,248,241,0.12);}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:none;}
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    .reveal{opacity:1;transform:none;transition:none;}
+    .cta,.cta:hover{transform:none;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <div class="brand">Carl <span>O'Neill</span></div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#practice">What I do</a>
+      <a href="#experience">Experience</a>
+      <a href="#credentials">Credentials</a>
+      <a href="#contact">Connect</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-in">
+    <span class="eyebrow">Learning &amp; Development · Aged Care, Disability &amp; NDIS</span>
+    <h1>I teach the people who <em>care</em> for people.</h1>
+    <p class="hero-sub">Eighteen years across aged care and disability, fifteen in the classroom — designing training that keeps care teams confident, compliant, and genuinely good at the work.</p>
+    <div class="hero-meta">
+      <span><i class="dot"></i> Logan Reserve, Queensland, Australia</span>
+      <span><i class="dot"></i> Certified Practicing Case Manager</span>
+      <span><i class="dot"></i> Trainer &amp; Assessor · Coach &amp; Mentor</span>
+    </div>
+
+    <div class="chain" aria-label="What the work connects">
+      <div class="node">
+        <div class="role">Trainer &amp; Assessor</div>
+        <div class="desc">Builds the skills, the compliance, the confidence.</div>
+      </div>
+      <div class="node">
+        <div class="role">Care &amp; support teams</div>
+        <div class="desc">1,500+ staff trained and mentored to deliver well.</div>
+      </div>
+      <div class="node">
+        <div class="role">People in their care</div>
+        <div class="desc">Where better training quietly becomes better days.</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="record">
+  <div class="record-in">
+    <div class="stat"><div class="num">18<b>+</b></div><div class="lbl">Years in aged care &amp; disability services</div></div>
+    <div class="stat"><div class="num">15</div><div class="lbl">Years teaching in the classroom</div></div>
+    <div class="stat"><div class="num">1,500<b>+</b></div><div class="lbl">Staff trained for NDIS-compliant care</div></div>
+    <div class="stat"><div class="num">1,200<b>+</b></div><div class="lbl">Staff supported across the LMS he runs</div></div>
+  </div>
+</div>
+
+<section id="about" class="wrap">
+  <div class="about-grid">
+    <div class="sec-head reveal" style="margin-bottom:0">
+      <span class="eyebrow">About</span>
+      <h2>A teacher first, in a sector that needs good ones.</h2>
+    </div>
+    <div class="reveal">
+      <p class="lede">I've spent my career in two places at once — out in aged care and disability services, and at the front of the classroom. That overlap is the whole point. I know what compliant, high-quality care actually looks like on the floor, and I know how to teach people to deliver it.</p>
+      <p class="lede">As a National Learning &amp; Development Manager I've built and run training for more than 1,500 staff — dementia care, behaviour support, crisis intervention, case management — and managed the systems that keep it all compliant and on the record. I coach, I mentor, and I'm a firm believer that learning never really finishes.</p>
+      <div class="pull" style="margin-top:34px">Training development, compliance, resilience and leadership — used to help teams provide care worth being proud of.</div>
+    </div>
+  </div>
+</section>
+
+<section id="practice" class="practice">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">What I do</span>
+      <h2>Six things I'm trusted with.</h2>
+    </div>
+    <div class="cards reveal">
+      <div class="card">
+        <div class="idx">01</div>
+        <h3>L&amp;D leadership at scale</h3>
+        <p>Designing and running national training programs, and managing the Learner Management Systems that keep 1,200+ staff current and accountable.</p>
+      </div>
+      <div class="card">
+        <div class="idx">02</div>
+        <h3>NDIS compliance &amp; quality</h3>
+        <p>Face-to-face training that keeps providers audit-ready, with the records and rigour that stand up to scrutiny.</p>
+      </div>
+      <div class="card">
+        <div class="idx">03</div>
+        <h3>Clinical &amp; care skills</h3>
+        <p>Dementia care, wound care, pressure management and medication adherence — taught for SIL &amp; SDA teams who use it every shift.</p>
+      </div>
+      <div class="card">
+        <div class="idx">04</div>
+        <h3>Behaviour support &amp; CPI</h3>
+        <p>Certified in Crisis Prevention &amp; Intervention — equipping staff to de-escalate safely and support complex behaviour with confidence.</p>
+      </div>
+      <div class="card">
+        <div class="idx">05</div>
+        <h3>Accredited training &amp; assessment</h3>
+        <p>Cert III Individual Support, Cert IV Ageing, Cert IV Disability and Diploma of Community Services — delivered and assessed to standard.</p>
+      </div>
+      <div class="card">
+        <div class="idx">06</div>
+        <h3>Coaching &amp; mentoring</h3>
+        <p>Extending knowledge, building personal resilience, and growing people so the whole team gets stronger over time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience" class="wrap">
+  <div class="sec-head reveal">
+    <span class="eyebrow">Experience</span>
+    <h2>Where the work has taken me.</h2>
+  </div>
+  <div class="timeline reveal">
+    <div class="job now">
+      <div class="when">Aug 2025 — Present</div>
+      <h3>Training Manager</h3>
+      <div class="org">You Me and the Community — NDIS Support Services, Brisbane QLD</div>
+      <p class="blurb">Leading training for an NDIS support provider, applying CPI and certified case management practice across the team.</p>
+    </div>
+    <div class="job now">
+      <div class="when">Jan 2023 — Present</div>
+      <h3>National Learning &amp; Development Manager</h3>
+      <div class="org">Disability Provider — Brisbane, QLD</div>
+      <p class="blurb">Managing the LMS for 1,200+ staff and delivering face-to-face NDIS compliance training. In-house programs for SIL &amp; SDA teams in dementia, wound care, pressure management and case management, plus behaviour support and CPI. Direct teaching of Certificate III, IV and Diploma classes.</p>
+    </div>
+    <div class="job">
+      <div class="when">May 2025 — Jul 2025</div>
+      <h3>Training Manager</h3>
+      <div class="org">Cocoon International College — RTO 5877</div>
+      <p class="blurb">Training and assessing the Diploma of Community Services (Case Management), Cert IV Ageing, Cert IV Disability and Cert III Individual Support (Ageing &amp; Disability).</p>
+    </div>
+    <div class="job">
+      <div class="when">Feb 2022 — Dec 2022</div>
+      <h3>Senior Instructor</h3>
+      <div class="org">Educare Training Institute Australasia — Brisbane, QLD</div>
+      <p class="blurb">Managing and teaching accredited training, overseeing trainers and compliance, and supporting school-based trainees across Cairns and the Gold Coast while liaising with aged care facilities statewide.</p>
+    </div>
+    <div class="job">
+      <div class="when">Nov 2015 — Feb 2022</div>
+      <h3>Senior Community Service Officer</h3>
+      <div class="org">Barcaldine Regional Council — Barcaldine, QLD</div>
+      <p class="blurb">Direct care for aged clients in their homes (CHSP &amp; HCP), service reporting to State and Commonwealth, and oversight of the NDIS rollout across Central Western Queensland — including My Aged Care and DEX reporting.</p>
+    </div>
+    <div class="job">
+      <div class="when">Oct 2007 — Nov 2015</div>
+      <h3>Project &amp; Program Coordinator</h3>
+      <div class="org">Barcaldine Regional Council — Home Assist Secure &amp; HACC Home Modifications</div>
+      <p class="blurb">Project-managing major home modifications and constructions, client consultation and service delivery, and finance and budget management alongside State and Commonwealth reporting.</p>
+    </div>
+  </div>
+</section>
+
+<section id="credentials" class="creds">
+  <div class="wrap">
+    <div class="sec-head reveal" style="margin-bottom:0">
+      <span class="eyebrow">Credentials</span>
+      <h2>Qualified, accredited, and still learning.</h2>
+    </div>
+    <div class="cred-grid reveal">
+      <div class="cred">
+        <span class="tick">✓ ACCREDITED</span>
+        <h3>Certified Practicing Case Manager</h3>
+        <p>Case Management Society of Australia &amp; New Zealand (CMSA) — certified and practicing since 2015.</p>
+      </div>
+      <div class="cred">
+        <span class="tick">✓ QUALIFIED</span>
+        <h3>Diploma of Teaching</h3>
+        <p>University of Southern Queensland — the foundation behind fifteen years in the classroom.</p>
+      </div>
+      <div class="cred">
+        <span class="tick">✓ CERTIFIED</span>
+        <h3>Crisis Prevention &amp; Intervention (CPI)</h3>
+        <p>Behaviour support and de-escalation training delivered to frontline care and support teams.</p>
+      </div>
+      <div class="cred">
+        <span class="tick">✓ ONGOING</span>
+        <h3>Personal Resilience Essentials</h3>
+        <p>Hello Driven — building the resilience that keeps people, and teams, advancing despite adversity.</p>
+      </div>
+    </div>
+    <div class="skill-row reveal" aria-label="Top skills">
+      <span class="pill">CPI Training</span>
+      <span class="pill">Certified Case Manager</span>
+      <span class="pill">Coaching &amp; Mentoring</span>
+      <span class="pill">Community Development</span>
+      <span class="pill">Employee Learning &amp; Development</span>
+      <span class="pill">Medication Adherence</span>
+      <span class="pill">Face-to-face Training</span>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="wrap contact">
+  <div class="reveal">
+    <span class="eyebrow" style="justify-content:center">Let's connect</span>
+    <h2>Looking for someone to build training your care teams will actually use?</h2>
+    <p class="lede">Open to L&amp;D leadership, training &amp; assessment, and coaching roles across the aged care and disability sectors. Happy to talk about programs, compliance, or growing a team.</p>
+    <!-- Replace the href below with your real LinkedIn URL or email -->
+    <a class="cta" href="https://www.linkedin.com/" target="_blank" rel="noopener">Connect on LinkedIn <span class="arr">→</span></a>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-in">
+    <span>Carl O'Neill — Learning &amp; Development · Aged Care, Disability &amp; NDIS</span>
+    <span>Logan Reserve, Queensland, Australia</span>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }});
+  },{threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
